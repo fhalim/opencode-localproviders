@@ -2,7 +2,7 @@
 
 # Build the binary
 build:
-    go build -o localopenapi-opencode .
+    go build -o opencode-localproviders .
 
 # Run tests
 test:
@@ -10,19 +10,19 @@ test:
 
 # Update LM Studio config from live API
 lmstudio:
-    ./localopenapi-opencode --base-url http://localhost:1234/ --provider lmstudio
+    ./opencode-localproviders --base-url http://localhost:1234/ --provider lmstudio
 
 # Update Ollama config from live API
 ollama:
-    ./localopenapi-opencode --base-url http://localhost:11434/ --provider ollama
+    ./opencode-localproviders --base-url http://localhost:11434/ --provider ollama
 
 # Dry-run for LM Studio (preview changes)
 dry-lmstudio:
-    ./localopenapi-opencode --base-url http://localhost:1234/ --provider lmstudio --dry-run
+    ./opencode-localproviders --base-url http://localhost:1234/ --provider lmstudio --dry-run
 
 # Clean build artifacts
 clean:
-    rm -f localopenapi-opencode
+    rm -f opencode-localproviders
 
 # Format code
 fmt:
