@@ -1,11 +1,11 @@
-# localopenapi-opencode
+# opencode-localproviders
 
 Auto-populate opencode.ai provider configurations from live OpenAI-compatible APIs.
 
 ## Usage
 
 ```bash
-./localopenapi-opencode --base-url http://localhost:1234/ --provider lmstudio
+./opencode-localproviders --base-url http://localhost:1234/ --provider lmstudio
 ```
 
 ### Flags
@@ -20,17 +20,17 @@ Auto-populate opencode.ai provider configurations from live OpenAI-compatible AP
 
 ### LM Studio (local)
 ```bash
-./localopenapi-opencode --base-url http://localhost:1234/ --provider lmstudio
+./opencode-localproviders --base-url http://localhost:1234/ --provider lmstudio
 ```
 
 ### Ollama
 ```bash
-./localopenapi-opencode --base-url http://localhost:11434/ --provider ollama
+./opencode-localproviders --base-url http://localhost:11434/ --provider ollama
 ```
 
 ### Dry run (preview changes)
 ```bash
-./localopenapi-opencode --base-url http://localhost:1234/ --provider lmstudio --dry-run
+./opencode-localproviders --base-url http://localhost:1234/ --provider lmstudio --dry-run
 ```
 
 ## How it works
