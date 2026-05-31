@@ -1,28 +1,34 @@
 #!/usr/bin/env just --justfile
 
+BIN_NAME := "opencode-localproviders"
+BIN_EXT := if os_family() == "windows" { ".exe" } else { "" }
+BIN_PATH := BIN_NAME + BIN_EXT
+BIN_EXEC := "." / BIN_PATH
+
 # Build the binary
 build:
-    go build -o opencode-localproviders .
+    go build -o {{BIN_PATH}} .
 
 # Run tests
 test:
     go test -v ./...
 
 # Update LM Studio config from live API
-lmstudio:
-    ./opencode-localproviders --base-url http://localhost:1234/ --provider lmstudio
+lmstudio: build
+    {{BIN_EXEC}} --base-url http://localhost:1234/ --provider lmstudio
 
 # Update Ollama config from live API
-ollama:
-    ./opencode-localproviders --base-url http://localhost:11434/ --provider ollama
+ollama: build
+    {{BIN_EXEC}} --base-url http://localhost:11434/ --provider ollama
 
 # Dry-run for LM Studio (preview changes)
-dry-lmstudio:
-    ./opencode-localproviders --base-url http://localhost:1234/ --provider lmstudio --dry-run
+dry-lmstudio: build
+    {{BIN_EXEC}} --base-url http://localhost:1234/ --provider lmstudio --dry-run
 
 # Clean build artifacts
 clean:
-    rm -f opencode-localproviders
+    go clean
+    @if [ -f {{BIN_PATH}} ]; then rm {{BIN_PATH}}; fi
 
 # Format code
 fmt:
@@ -34,7 +40,8 @@ lint:
 
 # Install locally
 install: build
-    cp localopenapi-opencode ~/.local/bin/
+    mkdir -p ~/.local/bin
+    cp {{BIN_PATH}} ~/.local/bin/
 
 # Run in dev mode (compile and execute)
 dev args:
